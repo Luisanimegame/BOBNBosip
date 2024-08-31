@@ -46,7 +46,6 @@ class LoadingState extends MusicBeatState
 		loadingart = new FlxSprite(0, 0).loadGraphic(Paths.image('loading/' + FlxG.random.int(0, 58)));
 		loadingart.setGraphicSize(-1, FlxG.height);
 		loadingart.updateHitbox();
-		loadingart.alpha = 0.1;
 		loadingart.scrollFactor.set(0, 0);
 		loadingart.screenCenter();
 		loadingart.antialiasing = true;
