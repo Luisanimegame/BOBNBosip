@@ -599,6 +599,11 @@ class TitleState extends MusicBeatState
 
 		if(logoBl != null)
 			logoBl.animation.play('bump', true);
+			
+		if (curStep % 4 == 3 && skippedIntro) {
+				bob.animation.play('idle', true);
+				bosip.animation.play('idle', true);
+		}
 
 		if(gfDance != null) {
 			danceLeft = !danceLeft;
