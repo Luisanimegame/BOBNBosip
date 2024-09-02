@@ -270,109 +270,94 @@ class TitleState extends MusicBeatState
 			bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		}
 
-		// bg.antialiasing = ClientPrefs.globalAntialiasing;
-		// bg.setGraphicSize(Std.int(bg.width * 0.6));
-		// bg.updateHitbox();
 		add(bg);
+		
+		
+		add(panelTop);
 
-		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
+		
+		bob.scale.set(0.55, 0.55);
+		bob.frames = Paths.getSparrowAtlas('titlemenu/Start_Screen_bob');
+		bob.animation.addByPrefix('idle', 'amortitle', 24, false);
+		bob.antialiasing = true;
+		add(bob);
+
+		
+		bosip.scale.set(0.55, 0.55);
+		bosip.frames = Paths.getSparrowAtlas('titlemenu/Start_Screen_bosip');
+		bosip.animation.addByPrefix('idle', 'bosiptitle', 24, false);
+		bosip.antialiasing = true;
+		add(bosip);
+
+		
+		add(panelBottom);
+
+		for (i in 1...3) {
+			var index:Int = i;
+
+			switch (i) {
+				case 3:
+					index = 1;
+				case 4:
+					index = 2;
+			}
+
+			var spr = new FlxSprite(-FlxG.width).loadGraphic(Paths.image('titlemenu/backgroundTile' + index));
+			spr.x = FlxG.width * (i - 1);
+			spr.antialiasing = true;
+			bg.add(spr);
+
+			var spr4 = new FlxSprite(-FlxG.width, -FlxG.height).loadGraphic(Paths.image('titlemenu/backgroundTile' + index));
+			spr4.x = FlxG.width * (i - 1);
+			spr4.antialiasing = true;
+			bg.add(spr4);
+
+			var spr5 = new FlxSprite(-FlxG.width, FlxG.height).loadGraphic(Paths.image('titlemenu/backgroundTile' + index));
+			spr5.x = FlxG.width * (i - 1);
+			spr5.antialiasing = true;
+			bg.add(spr5);
+
+			var spr2 = new FlxSprite(-FlxG.width).loadGraphic(Paths.image('titlemenu/panelTopTile' + index));
+			spr2.x = FlxG.width * (i - 1);
+			spr2.antialiasing = true;
+			panelTop.add(spr2);
+
+			var spr3 = new FlxSprite(-FlxG.width).loadGraphic(Paths.image('titlemenu/panelBottomTile' + index));
+			spr3.x = FlxG.width * (i - 1);
+			spr3.antialiasing = true;
+			panelBottom.add(spr3);
+		}
+		
+
+		
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
-
-		logoBl.antialiasing = ClientPrefs.globalAntialiasing;
+		logoBl.antialiasing = true;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
-		// logoBl.screenCenter();
+		logoBl.scale.set(0.80, 0.80);
+		logoBl.screenCenter(X);
 		// logoBl.color = FlxColor.BLACK;
 
-		swagShader = new ColorSwap();
-		gfDance = new FlxSprite(titleJSON.gfx, titleJSON.gfy);
-
-		var easterEgg:String = FlxG.save.data.psychDevsEasterEgg;
-		if(easterEgg == null) easterEgg = ''; //html5 fix
-
-		switch(easterEgg.toUpperCase())
-		{
-			#if TITLE_SCREEN_EASTER_EGG
-			case 'SHADOW':
-				gfDance.frames = Paths.getSparrowAtlas('ShadowBump');
-				gfDance.animation.addByPrefix('danceLeft', 'Shadow Title Bump', 24);
-				gfDance.animation.addByPrefix('danceRight', 'Shadow Title Bump', 24);
-			case 'RIVER':
-				gfDance.frames = Paths.getSparrowAtlas('RiverBump');
-				gfDance.animation.addByIndices('danceLeft', 'River Title Bump', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
-				gfDance.animation.addByIndices('danceRight', 'River Title Bump', [29, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-			case 'SHUBS':
-				gfDance.frames = Paths.getSparrowAtlas('ShubBump');
-				gfDance.animation.addByPrefix('danceLeft', 'Shub Title Bump', 24, false);
-				gfDance.animation.addByPrefix('danceRight', 'Shub Title Bump', 24, false);
-			case 'BBPANZU':
-				gfDance.frames = Paths.getSparrowAtlas('BBBump');
-				gfDance.animation.addByIndices('danceLeft', 'BB Title Bump', [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27], "", 24, false);
-				gfDance.animation.addByIndices('danceRight', 'BB Title Bump', [27, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], "", 24, false);
-			#end
-
-			default:
-			//EDIT THIS ONE IF YOU'RE MAKING A SOURCE CODE MOD!!!!
-			//EDIT THIS ONE IF YOU'RE MAKING A SOURCE CODE MOD!!!!
-			//EDIT THIS ONE IF YOU'RE MAKING A SOURCE CODE MOD!!!!
-				gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
-				gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-				gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
-		}
-		gfDance.antialiasing = ClientPrefs.globalAntialiasing;
-
-		add(gfDance);
-		gfDance.shader = swagShader.shader;
+		
+		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
+		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
+		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+		gfDance.antialiasing = true;
+		//add(gfDance);
 		add(logoBl);
-		logoBl.shader = swagShader.shader;
 
-		titleText = new FlxSprite(titleJSON.startx, titleJSON.starty);
-		#if (desktop && MODS_ALLOWED)
-		var path = "mods/" + Paths.currentModDirectory + "/images/titleEnter.png";
-		//trace(path, FileSystem.exists(path));
-		if (!FileSystem.exists(path)){
-			path = "mods/images/titleEnter.png";
-		}
-		//trace(path, FileSystem.exists(path));
-		if (!FileSystem.exists(path)){
-			path = "assets/images/titleEnter.png";
-		}
-		//trace(path, FileSystem.exists(path));
-		titleText.frames = FlxAtlasFrames.fromSparrow(BitmapData.fromFile(path),File.getContent(StringTools.replace(path,".png",".xml")));
-		#else
+		
 
+		
 		titleText.frames = Paths.getSparrowAtlas('titleEnter');
-		#end
-		var animFrames:Array<FlxFrame> = [];
-		@:privateAccess {
-			titleText.animation.findByPrefix(animFrames, "ENTER IDLE");
-			titleText.animation.findByPrefix(animFrames, "ENTER FREEZE");
-		}
-		
-		if (animFrames.length > 0) {
-			newTitle = true;
-			
-			titleText.animation.addByPrefix('idle', "ENTER IDLE", 24);
-			titleText.animation.addByPrefix('press', ClientPrefs.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
-		}
-		else {
-			newTitle = false;
-			
-			titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
-			titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
-		}
-		
-		titleText.antialiasing = ClientPrefs.globalAntialiasing;
+		titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
+		titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
+		titleText.antialiasing = true;
 		titleText.animation.play('idle');
 		titleText.updateHitbox();
 		// titleText.screenCenter(X);
 		add(titleText);
-
-		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo'));
-		logo.screenCenter();
-		logo.antialiasing = ClientPrefs.globalAntialiasing;
-		// add(logo);
 
 		// FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
 		// FlxTween.tween(logo, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG, startDelay: 0.1});
