@@ -89,6 +89,18 @@ class TitleState extends MusicBeatState
 	  #if android
 	  FlxG.android.preventDefaultKeys = [BACK];
 	  #end
+	
+			textGroup = new FlxGroup();
+			credGroup = new FlxGroup();
+			bg = new FlxTypedGroup<FlxSprite>();
+			panelTop = new FlxTypedGroup<FlxSprite>();
+			ngSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('newgrounds_logo'));
+			panelBottom = new FlxTypedGroup<FlxSprite>();
+			bob = new FlxSprite(FlxG.width * 0.5, -150);
+			bosip = new FlxSprite(-230, -150);
+			gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
+			logoBl = new FlxSprite(-150, -40);
+			titleText = new FlxSprite(125, FlxG.height * 0.8);
 	  
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
