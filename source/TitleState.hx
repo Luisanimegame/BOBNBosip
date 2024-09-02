@@ -288,7 +288,7 @@ class TitleState extends MusicBeatState
 		}else{
 			bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		}
-
+		
 		add(bg);
 		
 		
@@ -309,7 +309,7 @@ class TitleState extends MusicBeatState
 		add(bosip);
 
 		
-		add(panelBottom);
+		add(panelBottom
 
 		for (i in 1...3) {
 			var index:Int = i;
@@ -347,7 +347,7 @@ class TitleState extends MusicBeatState
 			panelBottom.add(spr3);
 		}
 		
-
+);
 		
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		logoBl.antialiasing = true;
@@ -566,6 +566,28 @@ class TitleState extends MusicBeatState
 		{
 			skipIntro();
 		}
+		
+		if (skippedIntro) {
+				for (i in bg) {
+					i.x -= 0.7 * scrollMultiplier;
+					if (i.x <= -FlxG.width)
+						i.x = (FlxG.width - 3);
+					
+				}
+				for (i in panelTop) {
+					i.x -= 1;
+					if (i.x <= -FlxG.width)
+						i.x = (FlxG.width);
+					
+				}
+				for (i in panelBottom) {
+					i.x -= 1;
+					if (i.x <= -FlxG.width)
+						i.x = (FlxG.width);
+					
+				}
+			}
+		});
 
 		if(swagShader != null)
 		{
